@@ -42,9 +42,13 @@ export default function App() {
         city: data.location.name,
         country: data.location.country,
         temp: data.current.temp_c,
-      })
+        condition: data.current.condition.code,
+        icon: data.current.condition.icon,
+        conditionText: data.current.condition.text,
+      });
+
     }catch ( error ){
-      console.log(error);
+      // console.log(error);
       setError({
         error: true,
         message: error.message,
@@ -85,6 +89,24 @@ export default function App() {
           Buscar
         </LoadingButton>
       </Box>
+
+      {weather.city && (
+        <Box 
+          sx={{ mt:2,
+          display: "grid",
+          gap: 2,
+          textAlign: "center",}}
+      )}
+      >
+
+      <Typography variant="h3" component={h2}>
+        {weather.city}, {weather.country}
+      </Typography>
+      <Box
+        component="img"
+        alt={weather.conditionText}
+        src={weather.icon}
+        sx={ margin: "0 auto"}
 
       <Typography
         textAlign="center"
